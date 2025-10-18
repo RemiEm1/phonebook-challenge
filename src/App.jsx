@@ -7,18 +7,81 @@ const FALLBACK_CONTACTS = [
         name: "Ada Lovelace",
         phone: "(555) 010-0101",
         email: "ada@example.com",
+        photo: "https://via.placeholder.com/96?text=AL",
+
     },
     {
         id: 2,
         name: "Alan Turing",
         phone: "(555) 010-0102",
         email: "alan@example.com",
+        photo: "https://via.placeholder.com/96?text=AT",
+
     },
     {
         id: 3,
         name: "Grace Hopper",
         phone: "(555) 010-0103",
         email: "grace@example.com",
+        photo: "https://via.placeholder.com/96?text=GH",
+
+    },
+
+    {
+        id: 4,
+        name: "Isabella Rivera",
+        phone: "(555) 010-0104",
+        email: "irivera@example.com",
+        photo: "https://via.placeholder.com/96?text=IR",
+
+    },
+    {
+        id: 5,
+        name: "Ava Johnson",
+        phone: "(555) 010-0105",
+        email: "ajohnson@example.com",
+        photo: "https://via.placeholder.com/96?text=AJ",
+
+    },
+    {
+        id: 6,
+        name: "Mateo Rivera",
+        phone: "(555) 010-0106",
+        email: "mRivera@example.com",
+        photo: "https://via.placeholder.com/96?text=MR",
+
+    },
+    {
+        id: 7,
+        name: "Liam Morales",
+        phone: "(555) 010-0177",
+        email: "lMorales@example.com",
+        photo: "https://via.placeholder.com/96?text=LM",
+
+    },
+    {
+        id: 8,
+        name: "Sofia Lovelace",
+        phone: "(555) 010-0101",
+        email: "SfLovelace@example.com",
+        photo: "https://via.placeholder.com/96?text=SL",
+
+    },
+    {
+        id: 9,
+        name: "Mateo Chen",
+        phone: "(555) 010-2199",
+        email: "mChen@example.com",
+        photo: "https://via.placeholder.com/96?text=MC",
+
+    },
+    {
+        id: 10,
+        name: "Remi Morales",
+        phone: "(555) 010-0110",
+        email: "rMorales@example.com",
+        photo: "https://via.placeholder.com/96?text=RM",
+
     },
 ];
 
@@ -40,8 +103,8 @@ const App = () => {
     return (
         <main className="page" data-testid="page-root">
             <header className="page__header">
-                <h1 className="page__title">Phonebook Challenge</h1>
-                <p className="page__subtitle">Build a simple contact directory</p>
+                <h1 className="page__title">Phonebook</h1>
+                <p className="page__subtitle">Contact Directory</p>
             </header>
 
             <section className="search" aria-labelledby="search-heading">
@@ -67,8 +130,33 @@ const App = () => {
             </section>
 
             <section className="contacts" aria-labelledby="contacts-heading">
-                <h2 id="contacts-heading">Contacts</h2>
-            </section>
+    <h2 id="contacts-heading">Contacts</h2>
+
+    <ul className="contacts__grid" aria-label="Contact list">
+        {contacts.map((c) => (
+            <li key={c.id}>
+                <article className="contact-card" aria-labelledby={`c-${c.id}-name`}>
+                    <img
+                        src={c.photo || "https://via.placeholder.com/96?text=?"}
+                        width="96"
+                        height="96"
+                        alt={`Portrait of ${c.name}`}
+                    />
+                    <h3 id={`c-${c.id}-name`} className="contact-card__name">
+                        {c.name}
+                    </h3>
+                    <p className="contact-card__phone">
+                        <strong>Phone:</strong> {c.phone}
+                    </p>
+                    <p className="contact-card__email">
+                        <strong>Email:</strong> {c.email}
+                    </p>
+                </article>
+            </li>
+        ))}
+    </ul>
+</section>
+
 
             <section className="form" aria-labelledby="form-heading">
                 <h2 id="form-heading">Add a Contact</h2>
@@ -78,6 +166,7 @@ const App = () => {
                         <input
                             id="name"
                             name="name"
+                            placeholder ="Jane/John Doe" //Placeholder
                             value={form.name}
                             onChange={(e) => setForm({ ...form, name: e.target.value })}
                             required
@@ -104,6 +193,7 @@ const App = () => {
                             id="email"
                             name="email"
                             type="email"
+                            placeholder="johnDoe@example.com"
                             value={form.email}
                             onChange={(e) =>
                                 setForm({ ...form, email: e.target.value })

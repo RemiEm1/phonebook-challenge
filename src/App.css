@@ -8,7 +8,7 @@
     display: grid;
     gap: 0.5rem;
     margin-bottom: 1.5rem;
-    text-align: left;
+    text-align: center;
 }
 
 .page__title {
@@ -75,7 +75,7 @@
 }
 
 .contact-card {
-    border: 1px solid #333;
+    border: 1px solid #333333;
     border-radius: 12px;
     padding: 1rem;
     background: #111;
@@ -94,7 +94,7 @@
 
 .form {
     margin-top: 2rem;
-    border-top: 1px solid #333;
+    border-top: 1px solid #e92222;
     padding-top: 1rem;
 }
 
@@ -115,7 +115,7 @@ select {
     border-radius: 8px;
     border: 1px solid #3a3a3a;
     padding: 0.5rem 0.75rem;
-    background: #1a1a1a;
+    background: #000000;
     color: inherit;
 }
 
@@ -126,7 +126,7 @@ select {
 
 .page__footer {
     margin-top: 3rem;
-    color: #777;
+    color: #16d17a;
     text-align: center;
 }
 
