@@ -120,3 +120,47 @@ For each section, there is an assignment on Brightspace. Provide:
 
 - Your final code repository link _directly to the branch for the specific section's work_.
 - A short note (1–2 paragraphs) describing what you implemented and any trade-offs.
+
+
+## Grading Rubrics
+
+### Section 1: HTML Essentials
+
+| **Criterion**                                  | **Exemplary**                                                          | **Proficient**                     | **Developing**                                   | **Points** |
+| ---------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------ | ---------- |
+| **Semantic Structure & Headings (32 pts)**     | Uses semantic elements; logical H1/H2/H3 hierarchy.                    | Minor hierarchy/semantic issues.   | Flat/incorrect headings; non-semantic structure. | /32        |
+| **Accessible Text & Images (20 pts)**          | Descriptive alt text; clear labels and placeholders where appropriate. | Some alt/label gaps.               | Largely missing alt/labels.                      | /20        |
+| **Static Contact List (10 contacts) (28 pts)** | Cleanly rendered list via array/loop; consistent fields.               | Present but minor inconsistencies. | Fewer than 10 or messy/duplicated markup.        | /28        |
+| **Clarity & Organization (20 pts)**            | Readable structure and comments as needed.                             | Mostly clear.                      | Hard to follow.                                  | /20        |
+
+
+### Section 2: Thematic & Basic Styling
+
+| **Criterion**                      | **Exemplary**                                                 | **Proficient**                    | **Developing**                       | **Points** |
+| ---------------------------------- | ------------------------------------------------------------- | --------------------------------- | ------------------------------------ | ---------- |
+| **Theme Cohesion (32 pts)**        | Colors/typography/imagery fit a coherent theme.               | Mostly cohesive.                  | Inconsistent or clashing theme.      | /32        |
+| **Readability & Spacing (24 pts)** | Comfortable line length, spacing, hierarchy.                  | Minor spacing/readability issues. | Cramped or inconsistent spacing.     | /24        |
+| **Focus & States (24 pts)**        | Clear focus styles and affordances for inputs/buttons.        | Some states missing/inconsistent. | No visible focus; poor affordances.  | /24        |
+| **CSS Organization (20 pts)**      | Logical structure; avoids dead rules; responsive tokens used. | Some organization issues.         | Disorganized; repeated/unused rules. | /20        |
+
+
+### Section 3: Pagination & Light Interactivity
+
+| **Criterion**                        | **Exemplary**                                                               | **Proficient**                                 | **Developing**                             | **Points** |
+| ------------------------------------ | --------------------------------------------------------------------------- | ---------------------------------------------- | ------------------------------------------ | ---------- |
+| **Pagination (1 per page) (40 pts)** | Exactly one contact per page with correct index handling.                   | Works but with minor off-by-one/edge issues.   | Incomplete or unreliable.                  | /40        |
+| **Navigation Controls (28 pts)**     | Prev/Next (and optional jump) work and disable at edges; accessible labels. | Mostly works; minor edge/accessibility issues. | Glitchy controls; missing disabled states. | /28        |
+| **State & Rendering Logic (32 pts)** | Simple, readable state; no unnecessary re-renders.                          | Some duplication/inefficiency.                 | Confusing or buggy state flow.             | /32        |
+
+
+### Section 4: Data, Search, & Add Contact
+
+| **Criterion**                                      | **Exemplary**                                                                               | **Proficient**                                   | **Developing**                         | **Points** |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------ | -------------------------------------- | ---------- |
+| **Fetching & Fallback (28 pts)**                   | `useEffect` fetch with loading/error; clean fallback to local list; resilient to failure.   | Works but minor race/cleanup issues.             | Unreliable or no fallback.             | /28        |
+| **Search (name/phone, case-insensitive) (24 pts)** | Fast, correct filtering; debounced or efficient; optional highlight bonus.                  | Works but some edge cases (spacing, formatting). | Incomplete or incorrect filter logic.  | /24        |
+| **Add Contact + Validation (32 pts)**              | Validates (name≥2, phone req, email has `@`); inline messages; inserts at top; clears form. | Mostly validates; minor messaging/clear issues.  | Weak validation; adds invalid entries. | /32        |
+| **State Integrity & UX (16 pts)**                  | No duplicates on add, consistent sorting, clear feedback.                                   | Minor UX inconsistencies.                        | Confusing or error-prone.              | /16        |
+
+
+Extra credit may be given. Some ideas to consider are: match highlighting polish, `localStorage` persistence done cleanly, thoughtful responsive layout, or exceptionally clear code comments.
