@@ -164,3 +164,10 @@ For each section, there is an assignment on Brightspace. Provide:
 
 
 Extra credit may be given. Some ideas to consider are: match highlighting polish, `localStorage` persistence done cleanly, thoughtful responsive layout, or exceptionally clear code comments.
+
+
+Images used:
+female avatar
+<a href="https://www.flaticon.com/free-icons/female" title="female icons">Female icons created by Prosymbols Premium - Flaticon</a>
+Male avatar
+<a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
