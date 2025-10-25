@@ -169,5 +169,6 @@ Extra credit may be given. Some ideas to consider are: match highlighting polish
 Images used:
 female avatar
 <a href="https://www.flaticon.com/free-icons/female" title="female icons">Female icons created by Prosymbols Premium - Flaticon</a>
+
 Male avatar
 <a href="https://www.flaticon.com/free-icons/user" title="user icons">User icons created by Freepik - Flaticon</a>
