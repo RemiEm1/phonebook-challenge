@@ -7,7 +7,7 @@ const FALLBACK_CONTACTS = [
         name: "Ada Lovelace",
         phone: "(555) 010-0101",
         email: "ada@example.com",
-        photo: "https://via.placeholder.com/96?text=AL",
+        photo: "avatars/female.png",
 
     },
     {
@@ -15,7 +15,7 @@ const FALLBACK_CONTACTS = [
         name: "Alan Turing",
         phone: "(555) 010-0102",
         email: "alan@example.com",
-        photo: "https://via.placeholder.com/96?text=AT",
+        photo: "avatars/male.png",
 
     },
     {
@@ -23,7 +23,7 @@ const FALLBACK_CONTACTS = [
         name: "Grace Hopper",
         phone: "(555) 010-0103",
         email: "grace@example.com",
-        photo: "https://via.placeholder.com/96?text=GH",
+        photo: "avatars/female.png",
 
     },
 
@@ -32,7 +32,7 @@ const FALLBACK_CONTACTS = [
         name: "Isabella Rivera",
         phone: "(555) 010-0104",
         email: "irivera@example.com",
-        photo: "https://via.placeholder.com/96?text=IR",
+        photo: "avatars/female.png",
 
     },
     {
@@ -40,7 +40,7 @@ const FALLBACK_CONTACTS = [
         name: "Ava Johnson",
         phone: "(555) 010-0105",
         email: "ajohnson@example.com",
-        photo: "https://via.placeholder.com/96?text=AJ",
+        photo: "avatars/female.png",
 
     },
     {
@@ -48,7 +48,7 @@ const FALLBACK_CONTACTS = [
         name: "Mateo Rivera",
         phone: "(555) 010-0106",
         email: "mRivera@example.com",
-        photo: "https://via.placeholder.com/96?text=MR",
+        photo: "avatars/male.png",
 
     },
     {
@@ -56,7 +56,7 @@ const FALLBACK_CONTACTS = [
         name: "Liam Morales",
         phone: "(555) 010-0177",
         email: "lMorales@example.com",
-        photo: "https://via.placeholder.com/96?text=LM",
+        photo: "avatars/male.png",
 
     },
     {
@@ -64,7 +64,7 @@ const FALLBACK_CONTACTS = [
         name: "Sofia Lovelace",
         phone: "(555) 010-0101",
         email: "SfLovelace@example.com",
-        photo: "https://via.placeholder.com/96?text=SL",
+        photo: "avatars/female.png",
 
     },
     {
@@ -72,7 +72,7 @@ const FALLBACK_CONTACTS = [
         name: "Mateo Chen",
         phone: "(555) 010-2199",
         email: "mChen@example.com",
-        photo: "https://via.placeholder.com/96?text=MC",
+        photo: "avatars/male.png",
 
     },
     {
@@ -80,7 +80,7 @@ const FALLBACK_CONTACTS = [
         name: "Remi Morales",
         phone: "(555) 010-0110",
         email: "rMorales@example.com",
-        photo: "https://via.placeholder.com/96?text=RM",
+        photo: "avatars/male.png",
 
     },
 ];

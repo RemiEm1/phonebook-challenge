@@ -1,16 +1,16 @@
 :root {
   /* Light theme colors */
-  --bg: #e6ffe6;
-  --fg: #2828d6;
+  --bg: #e6ffe6;  /*Changed background color for a minty color*/
+  --fg: #d64c4c;
   --muted: #7e99b4;
   --border: #000000;
-  --accent: #009548;
+  --accent: #b55c5c;
 }
 
 @media (prefers-color-scheme: light) {
   :root {
     /* Dark theme colors for media query */
-    --bg: #ffffff;
+    --bg: #e6ffe6;
     --fg: #1d1d1f;
     --muted: #6e6e73;
     --border: #e5e5ea;
@@ -28,7 +28,12 @@ body,
     height: 100%;
 }
 
+.contact-card{
+  font-family:'Courier New', Courier, monospace; /*change font family for only contact card to make it
+                                                    seem more "retro"*/
+}
 body {
+    font-size: 16px; /*Included font size*/
     margin: 0;
     font-family:
         system-ui,
@@ -46,13 +51,25 @@ body {
     background: var(--bg);
 }
 
-a {
-    color: var(--accent);
+
+a, button, [role="button"], input, select, textarea {/*All variables are included here.*/
+  outline: none;
 }
 
-button,
-input,
-select {
-    font: inherit;
-    color: inherit;
+/* Custom focus ring for all interactive elements */
+a:focus-visible, /*Focus ring is set to appear when user navigate using Tab key*/
+button:focus-visible,
+[role="button"]:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent);  /* outline color from your theme */
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-radius: 6px;
+  transition: box-shadow 0.1s ease;
 }
+
+
+
+
