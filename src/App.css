@@ -18,7 +18,7 @@
 
 .page__subtitle {
     margin: 0;
-    color: #888;
+    color: var(--muted);
 }
 
 .toolbar {
@@ -30,9 +30,9 @@
 
 .btn {
     border-radius: 8px;
-    border: 1px solid #3a3a3a;
+    border: 1px solid var(--border);
     padding: 0.5rem 0.9rem;
-    background: #1a1a1a;
+    background: var(--panel);
     color: inherit;
     cursor: pointer;
 }
@@ -47,7 +47,7 @@
 .search {
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid #333;
+    border-top: 1px solid var(--border);
 }
 
 .search__controls {
@@ -58,7 +58,7 @@
 }
 
 .search__results {
-    color: #888;
+    color: var(--muted);
 }
 
 .contacts {
@@ -75,10 +75,10 @@
 }
 
 .contact-card {
-    border: 1px solid #333333;
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1rem;
-    background: #111;
+    background: var(--panel);
 }
 
 .contact-card__name {
@@ -110,12 +110,11 @@
     gap: 0.25rem;
 }
 
-input,
-select {
+input,select {
     border-radius: 8px;
-    border: 1px solid #3a3a3a;
+    border: 1px solid var(--border);/*Included the var variable to bring the colors defined in :root*/
     padding: 0.5rem 0.75rem;
-    background: #000000;
+    background: var(--panel);
     color: inherit;
 }
 
@@ -137,4 +136,41 @@ select {
     .search__controls {
         grid-template-columns: 1fr 1fr;
     }
+}
+
+.app-frame {
+  display: flex;
+  justify-content: center;
+  padding: 24px;
+  background: var(--bg);
+  min-height: 100dvh;
+}
+
+.container {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+}
+/*Addition for Section-3 Branch*/
+.pagination {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 2rem;
+}
+
+.page-indicator {
+  min-width: 80px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.btn[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
 }

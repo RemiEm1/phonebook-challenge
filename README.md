@@ -1,4 +1,5 @@
 # Phonebook Challenge
+
 This repository contains a single-page React app scaffolded with Vite. Your task is to build it into a small phonebook/directory: start with a static contact list, then make it dynamic by fetching JSON, adding search, and basic interactivity.
 
 ## Getting Started
@@ -121,7 +122,6 @@ For each section, there is an assignment on Brightspace. Provide:
 - Your final code repository link _directly to the branch for the specific section's work_.
 - A short note (1–2 paragraphs) describing what you implemented and any trade-offs.
 
-
 ## Grading Rubrics
 
 ### Section 1: HTML Essentials
@@ -133,7 +133,6 @@ For each section, there is an assignment on Brightspace. Provide:
 | **Static Contact List (10 contacts) (28 pts)** | Cleanly rendered list via array/loop; consistent fields.               | Present but minor inconsistencies. | Fewer than 10 or messy/duplicated markup.        | /28        |
 | **Clarity & Organization (20 pts)**            | Readable structure and comments as needed.                             | Mostly clear.                      | Hard to follow.                                  | /20        |
 
-
 ### Section 2: Thematic & Basic Styling
 
 | **Criterion**                      | **Exemplary**                                                 | **Proficient**                    | **Developing**                       | **Points** |
@@ -143,7 +142,6 @@ For each section, there is an assignment on Brightspace. Provide:
 | **Focus & States (24 pts)**        | Clear focus styles and affordances for inputs/buttons.        | Some states missing/inconsistent. | No visible focus; poor affordances.  | /24        |
 | **CSS Organization (20 pts)**      | Logical structure; avoids dead rules; responsive tokens used. | Some organization issues.         | Disorganized; repeated/unused rules. | /20        |
 
-
 ### Section 3: Pagination & Light Interactivity
 
 | **Criterion**                        | **Exemplary**                                                               | **Proficient**                                 | **Developing**                             | **Points** |
@@ -151,7 +149,6 @@ For each section, there is an assignment on Brightspace. Provide:
 | **Pagination (1 per page) (40 pts)** | Exactly one contact per page with correct index handling.                   | Works but with minor off-by-one/edge issues.   | Incomplete or unreliable.                  | /40        |
 | **Navigation Controls (28 pts)**     | Prev/Next (and optional jump) work and disable at edges; accessible labels. | Mostly works; minor edge/accessibility issues. | Glitchy controls; missing disabled states. | /28        |
 | **State & Rendering Logic (32 pts)** | Simple, readable state; no unnecessary re-renders.                          | Some duplication/inefficiency.                 | Confusing or buggy state flow.             | /32        |
-
 
 ### Section 4: Data, Search, & Add Contact
 
@@ -161,6 +158,5 @@ For each section, there is an assignment on Brightspace. Provide:
 | **Search (name/phone, case-insensitive) (24 pts)** | Fast, correct filtering; debounced or efficient; optional highlight bonus.                  | Works but some edge cases (spacing, formatting). | Incomplete or incorrect filter logic.  | /24        |
 | **Add Contact + Validation (32 pts)**              | Validates (name≥2, phone req, email has `@`); inline messages; inserts at top; clears form. | Mostly validates; minor messaging/clear issues.  | Weak validation; adds invalid entries. | /32        |
 | **State Integrity & UX (16 pts)**                  | No duplicates on add, consistent sorting, clear feedback.                                   | Minor UX inconsistencies.                        | Confusing or error-prone.              | /16        |
-
 
 Extra credit may be given. Some ideas to consider are: match highlighting polish, `localStorage` persistence done cleanly, thoughtful responsive layout, or exceptionally clear code comments.
