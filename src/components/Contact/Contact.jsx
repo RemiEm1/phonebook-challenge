@@ -1,7 +1,7 @@
 import "./Contact.css";
 
 const Contact = (props) => {
-    const { name, phone, email,photo } = props;
+    const { name, phone, email, photo } = props;
     return (
         <div className="contact-card">
             <img src={photo} alt={name} />

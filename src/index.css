@@ -1,37 +1,41 @@
 :root {
-  /* Light theme (default) */
-  --bg: #e6ffe6;
-  --fg: #1d1d1f;
-  --muted: #6e6e73;
-  --border: #000000;
-  --accent: #b55c5c;
-  --panel: #ffffff;
+    /* Light theme (default) */
+    --bg: #e6ffe6;
+    --fg: #1d1d1f;
+    --muted: #6e6e73;
+    --border: #000000;
+    --accent: #b55c5c;
+    --panel: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark theme */
-    --bg: #0f1216;
-    --fg: #e5e7eb;
-    --muted: #a3a9b3;
-    --border: #2a2f33;
-    --accent: #ff7f50;
-    --panel: #151a21;
-  }
+    :root {
+        /* Dark theme */
+        --bg: #0f1216;
+        --fg: #e5e7eb;
+        --muted: #a3a9b3;
+        --border: #2a2f33;
+        --accent: #ff7f50;
+        --panel: #151a21;
+    }
 }
 
-* { box-sizing: border-box; }
+* {
+    box-sizing: border-box;
+}
 
-html, body, #root {
-  height: 100%;
+html,
+body,
+#root {
+    height: 100%;
 }
 
 body {
-  font-size: 16px;
-  margin: 0;
-  font-family: "Courier New", Courier, monospace;
-  color: var(--fg);
-  background: var(--bg);
+    font-size: 16px;
+    margin: 0;
+    font-family: "Courier New", Courier, monospace;
+    color: var(--fg);
+    background: var(--bg);
 }
 
 /* Universal focus ring */
@@ -40,9 +44,9 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  box-shadow: 0 0 0 3px var(--accent);
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  border-radius: 6px;
-  transition: box-shadow 0.1s ease;
+    box-shadow: 0 0 0 3px var(--accent);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    border-radius: 6px;
+    transition: box-shadow 0.1s ease;
 }
