@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
+/** Local fallback contacts (used if fetch fails) */
 const FALLBACK_CONTACTS = [
     {
         id: 1,
@@ -23,71 +24,97 @@ const FALLBACK_CONTACTS = [
         email: "grace@example.com",
         photo: "avatars/female.png",
     },
-    {
-        id: 4,
-        name: "Isabella Rivera",
-        phone: "(555) 010-0104",
-        email: "irivera@example.com",
-        photo: "avatars/female.png",
-    },
-    {
-        id: 5,
-        name: "Ava Johnson",
-        phone: "(555) 010-0105",
-        email: "ajohnson@example.com",
-        photo: "avatars/female.png",
-    },
-    {
-        id: 6,
-        name: "Mateo Rivera",
-        phone: "(555) 010-0106",
-        email: "mrivera@example.com",
-        photo: "avatars/male.png",
-    },
-    {
-        id: 7,
-        name: "Liam Morales",
-        phone: "(555) 010-0177",
-        email: "lmorales@example.com",
-        photo: "avatars/male.png",
-    },
-    {
-        id: 8,
-        name: "Sofia Lovelace",
-        phone: "(555) 010-0101",
-        email: "sflovelace@example.com",
-        photo: "avatars/female.png",
-    },
-    {
-        id: 9,
-        name: "Mateo Chen",
-        phone: "(555) 010-2199",
-        email: "mchen@example.com",
-        photo: "avatars/male.png",
-    },
-    {
-        id: 10,
-        name: "Remi Morales",
-        phone: "(555) 010-0110",
-        email: "rmorales@example.com",
-        photo: "avatars/male.png",
-    },
 ];
 
-const App = () => {
-    const [contacts] = useState(FALLBACK_CONTACTS);
-    // Section 3: pagination state (1-based page index)
-    const [page, setPage] = useState(1); //Page initialized to 1
-    const totalPages = contacts.length || 1;
-    // Clamp the index so it's always valid even if the list changes
-    const index = Math.min(Math.max(page - 1, 0), totalPages - 1);
-    const current = contacts[index];
+/** Simple id generator */
+const newId = () => Date.now() + Math.floor(Math.random() * 1000);
 
-    const goPrev = () => setPage((p) => Math.max(1, p - 1));
-    const goNext = () => setPage((p) => Math.min(totalPages, p + 1));
+export default function App() {
+    // data + ui state
+    const [contacts, setContacts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [loadError, setLoadError] = useState("");
 
-    const atFirst = page <= 1;
-    const atLast = page >= totalPages;
+    // search state
+    const [query, setQuery] = useState("");
+
+    // form state
+    const [form, setForm] = useState({ name: "", phone: "", email: "" });
+    const [errors, setErrors] = useState({});
+
+    /** Fetch from /data/contacts.json, fall back to local list on failure */
+    useEffect(() => {
+        let isMounted = true;
+        (async () => {
+            try {
+                const res = await fetch("/data/contacts.json", { cache: "no-store" });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const data = await res.json();
+                if (isMounted) {
+                    // Normalize missing photos (optional)
+                    const withPhotos = (data || []).map((c, i) => ({
+                        photo:
+                            c.photo ||
+                            (i % 2 ? "avatars/male.png" : "avatars/female.png"),
+                        ...c,
+                    }));
+                    setContacts(withPhotos);
+                    setLoadError("");
+                }
+            } catch (err) {
+                // Fallback
+                if (isMounted) {
+                    setContacts(FALLBACK_CONTACTS);
+                    setLoadError("Loaded local fallback (network or file error).");
+                }
+            } finally {
+                if (isMounted) setLoading(false);
+            }
+        })();
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
+    /** Case-insensitive search by name OR phone */
+    const filtered = useMemo(() => {
+        const q = query.trim().toLowerCase();
+        if (!q) return contacts;
+        return contacts.filter(
+            (c) =>
+                (c.name || "").toLowerCase().includes(q) ||
+                (c.phone || "").toLowerCase().includes(q)
+        );
+    }, [contacts, query]);
+
+    /** Form validation */
+    const validate = (f) => {
+        const e = {};
+        if (!f.name || f.name.trim().length < 2)
+            e.name = "Name must be at least 2 characters.";
+        if (!f.phone || !f.phone.trim()) e.phone = "Phone is required.";
+        if (!f.email || !f.email.includes("@")) e.email = "Email must include @.";
+        return e;
+    };
+
+    /** Submit: add new contact to TOP of list and clear form */
+    const onSubmit = (ev) => {
+        ev.preventDefault();
+        const e = validate(form);
+        setErrors(e);
+        if (Object.keys(e).length) return;
+
+        const contact = {
+            id: newId(),
+            name: form.name.trim(),
+            phone: form.phone.trim(),
+            email: form.email.trim(),
+            photo: "avatars/male.png", // or pick based on a dropdown later
+        };
+        setContacts((prev) => [contact, ...prev]);
+        setForm({ name: "", phone: "", email: "" });
+        setErrors({});
+    };
 
     return (
         <div className="app-frame">
@@ -95,78 +122,147 @@ const App = () => {
                 <main className="page" data-testid="page-root">
                     <header className="page__header">
                         <h1 className="page__title">Phonebook</h1>
-                        <p className="page__subtitle">Retro Contact Directory</p>
+                        <p className="page__subtitle">Contacts & Information</p>
                     </header>
 
-                    <section className="contacts" aria-labelledby="contacts-heading">
-                        <h2 id="contacts-heading">Contacts</h2>
-                        <ul
-                            className="contacts__grid"
-                            aria-label="Contact list (single item)"
-                        >
-                            <li key={current.id}>
-                                <article
-                                    className="contact-card"
-                                    aria-labelledby={`c-${current.id}-name`}
-                                >
-                                    <img
-                                        src={
-                                            current.photo ||
-                                            "https://via.placeholder.com/96?text=?"
-                                        }
-                                        width="96"
-                                        height="96"
-                                        alt={`Portrait of ${current.name}`}
-                                    />
-                                    <h3
-                                        id={`c-${current.id}-name`}
-                                        className="contact-card__name"
-                                    >
-                                        {current.name}
-                                    </h3>
-                                    <p className="contact-card__phone">
-                                        <strong>Phone:</strong> {current.phone}
-                                    </p>
-                                    <p className="contact-card__email">
-                                        <strong>Email:</strong> {current.email}
-                                    </p>
-                                </article>
-                            </li>
-                        </ul>
+                    {/* Search */}
+                    <section className="search" style={{ marginBottom: "1rem" }}>
+                        <label className="sr-only" htmlFor="q">
+                            Search
+                        </label>
+                        <input
+                            id="q"
+                            type="text"
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            placeholder="Search by name or phone…"
+                            className="input"
+                            aria-label="Search contacts by name or phone"
+                        />
+                    </section>
 
-                        <nav className="pagination" aria-label="Pagination">
-                            <button
-                                className="btn"
-                                onClick={goPrev}
-                                disabled={atFirst}
-                                aria-label="Previous contact"
-                            >
-                                Previous
+                    {/* Loading / Error */}
+                    {loading && <p role="status">Loading contacts…</p>}
+                    {!loading && loadError && (
+                        <p role="alert" style={{ color: "#b00020" }}>
+                            {loadError}
+                        </p>
+                    )}
+
+                    {/* Contacts list */}
+                    {!loading && (
+                        <section
+                            className="contacts"
+                            aria-labelledby="contacts-heading"
+                        >
+                            <h2 id="contacts-heading">Contacts</h2>
+
+                            {filtered.length === 0 ? (
+                                <p>No results.</p>
+                            ) : (
+                                <ul
+                                    className="contacts__grid"
+                                    aria-label="Contact list"
+                                >
+                                    {filtered.map((c) => (
+                                        <li key={c.id}>
+                                            <article
+                                                className="contact-card"
+                                                aria-labelledby={`c-${c.id}-name`}
+                                            >
+                                                <img
+                                                    src={
+                                                        c.photo ||
+                                                        "https://via.placeholder.com/96?text=?"
+                                                    }
+                                                    width="96"
+                                                    height="96"
+                                                    alt={`Portrait of ${c.name}`}
+                                                />
+                                                <h3
+                                                    id={`c-${c.id}-name`}
+                                                    className="contact-card__name"
+                                                >
+                                                    {c.name}
+                                                </h3>
+                                                <p className="contact-card__phone">
+                                                    <strong>Phone:</strong> {c.phone}
+                                                </p>
+                                                <p className="contact-card__email">
+                                                    <strong>Email:</strong> {c.email}
+                                                </p>
+                                            </article>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </section>
+                    )}
+
+                    {/* Add Contact Form */}
+                    <section
+                        aria-labelledby="add-heading"
+                        style={{ marginTop: "2rem" }}
+                    >
+                        <h2 id="add-heading">Add Contact</h2>
+                        <form onSubmit={onSubmit} noValidate className="form">
+                            <div className="form__row">
+                                <label htmlFor="name">Name</label>
+                                <input
+                                    id="name"
+                                    value={form.name}
+                                    onChange={(e) =>
+                                        setForm({ ...form, name: e.target.value })
+                                    }
+                                    placeholder="e.g., Robert Emicente"
+                                />
+                                {errors.name && (
+                                    <small className="error">{errors.name}</small>
+                                )}
+                            </div>
+
+                            <div className="form__row">
+                                <label htmlFor="phone">Phone</label>
+                                <input
+                                    id="phone"
+                                    value={form.phone}
+                                    onChange={(e) =>
+                                        setForm({ ...form, phone: e.target.value })
+                                    }
+                                    placeholder="(555) 010-0104"
+                                />
+                                {errors.phone && (
+                                    <small className="error">{errors.phone}</small>
+                                )}
+                            </div>
+
+                            <div className="form__row">
+                                <label htmlFor="email">Email</label>
+                                <input
+                                    id="email"
+                                    type="email"
+                                    value={form.email}
+                                    onChange={(e) =>
+                                        setForm({ ...form, email: e.target.value })
+                                    }
+                                    placeholder="rEmicente@example.com"
+                                />
+                                {errors.email && (
+                                    <small className="error">{errors.email}</small>
+                                )}
+                            </div>
+
+                            <button className="btn" type="submit">
+                                Add
                             </button>
-                            <span className="page-indicator" aria-live="polite">
-                                {page} / {totalPages}
-                            </span>
-                            <button
-                                className="btn"
-                                onClick={goNext}
-                                disabled={atLast}
-                                aria-label="Next contact"
-                            >
-                                Next
-                            </button>{" "}
-                            {/*Used the nav function to add both Previous and Next buttons*/}
-                        </nav>
+                        </form>
                     </section>
 
                     <footer className="page__footer">
-                        <small>
-                            Retro phonebook directory || Section 3.
-                        </small>
+                        <small>Retro phonebook directory || Section 4.</small>
                     </footer>
                 </main>
             </div>
         </div>
     );
-};
-
-export default App;
+}
